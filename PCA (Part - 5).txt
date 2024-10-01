@@ -1,0 +1,60 @@
+                                                           Part 5 : PCA
+                                                                   =====
+
+
+import pandas as pd
+from pandas import DataFrame
+importmatplotlib.pyplot as [lt
+from sklearn.decomposition import PCA
+from sklearn.preprocessing import StandardScaler
+
+df=pd.read_csv("iris.csv")
+df
+
+df.shape  ....................................................# Displays the shape of the dataset
+
+type(df)  ....................................................# Displays the type of the dataset
+
+df.info()  ...................................................# Displays various information about the dataset
+
+df.describe()  ...............................................# Displays various statistical values about the dataset
+
+
+df.species.replace({"Setosa":0,"Versicolor":1,"Virginica":2},inplace=True)  ...........# Replaces the original values with the given 
+                                                                                         values,inplace=True means permanent change
+
+
+features=['sepal_length','sepal_width','petal_length','petal_width']
+x=df.loc[:,features].values  ...........................................# loc is same as iloc, where loc takes any values and not only numbers
+z=StandardScaler().fit_transform(x)
+DataFrame(data=z,columns=features)  ....................................# Standardizes all the datas/values
+
+
+
+pca=PCA()
+pca.fit_transform(z)
+pca.explained_variance_ratio_    .......................................# Variance
+
+
+pca=PCA(n_components=2)
+principal_components= pca.fit_transform(z)
+DataFrame(data=principal_components, columns=["PC1","PC2"])  ...........# PC projection on 2D 
+
+
+pca.explained_variance_ratio_    .......................................# Variance
+
+
+
+
+====================================================================================================================================================
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+====================================================================================================================================================
+
+
+
+
+
+
+
+
+

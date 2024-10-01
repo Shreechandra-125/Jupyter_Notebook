@@ -1,0 +1,114 @@
+                                                           Part 3 : REGRESSION
+                                                                   ============
+
+
+
+######### 1.Simple Linear Regression #########
+        ==============================
+
+import pandas as pd
+from pandas import DataFrame
+from sklearn imprt linear_model
+import statsmodels.api as sm
+
+df=pd.read_csv("stock.csv")  .......................# Loading the dataset
+df  ................................................# Reading the dataset
+
+df.shape  ..........................................# Displays the shape of the dataset
+
+X=df[["Interest_Rate"]]  ...........................# indpendent var (must be written within 2 brackets. --> [[...]] )
+Y=df["Stock_Index_Price"]  .........................# dependenet var
+
+reg=linear_model.LinearRegression()
+reg.fit(X,Y)  ......................................# Fitting X,Y on the regression line/ fitting the LinearRegression model
+
+reg.intercept_    ................................................# Display the intercept
+print(reg.coef_)  ................................................# Printing the coefficients
+
+
+
+import matplotlib.pyplot as plt
+import seaborn as sn
+sn.regplot(x=X,y=Y)  ...............................# Displays a scatter plot with a regression line.....Here, x contains the independent var, y 
+                                                      contains the dependent var, and if the are not declared previously then we need to give a 3rd 
+                                                      argument,data, eg: data=df
+plt.title("Scatter plot for Stock_Index_Price versus Interest_Rate with a regression line", y=1.05)  ............# y denotes the space beween the 
+                                                                                                                   title and the graph
+plt.show()
+
+
+
+new_Interest_Rate=2.90   ...........................# Given independent var
+print("Predicted Stock_Index_Price:",reg.predict([[new_Interest_Rate]]))  .............# Displays the predicted value of the dependent var wrt the given independent var
+
+
+reg.score(X,Y)  ....................................# Displays the coefficient of determination / r-sq
+
+
+Z=sm.add_constant(X)  ..............................# Adding a constant to X-library for linear regresion
+model=sm.OLS(Y,Z).fit()  ...........................# Fitting the OLS model
+model.rsquared_adj  ................................# Displays the Adjusted r-sq
+
+
+variables=["Interest_Rate","Stock_Index_Price"]
+df[variables].corr()  ..............................# Diplays the correlation between the independent var and dependent var
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+######### 2.Multiple Linear Regression #########
+        ================================
+
+X=df[['Interest_Rate','Unemployment_Rate']]  .....................# Two independent variables
+Y=df['Stock_Index_Price']  .......................................# Dependent variable
+
+reg=linear_model.LinearRegression().fit(X,Y)  ....................# Fitting the regression model
+reg
+
+reg.intercept_    ................................................# Display the intercept
+print(reg.coef_)  ................................................# Printing the coefficients
+
+New_Interest_Rate=2.75
+New_unemployment_Rate=5.3
+reg.predict([[New_Interest_Rate,New_unemployment_Rate]])  ........# Displays the predicted value of the dependent var wrt the given independent vars
+
+reg.score(X,Y)  ..............................# Diaplays the value of r-sq
+
+Z=sm.add_constant(X)  ........................# Adds a constant to X for regression
+model=sm.OLS(Y,Z).fit()
+model.rsquared_adj  ..........................# Diaplays the value of adjusted r-sq
+
+
+
+=======================================================================XXXXXXX======================================================================
+
+
+
+
+
+
+@ reg=linear_model.LinearRegression()
+
+1) reg.fit(x,y)              # Regression model fitting with sklearn
+2) reg.intercept_            # Diplays the intercept value.............'intercept_' is an attribute of the LinearRegression() object
+3) reg.coef_                 # Diplays the coefficient value
+4) sn.regplot(x=,y=,data=)   # Diplays the scatter plot of the two variables x, y with a regression line
+5) reg.predict([[...]])      # Predicts the value of the dependent var wrt the independent var
+6) reg.score(X,Y)            # Displays the r-sq(coefficient of determination) value
+
+
+7) Z=sm.add_constant(X)      # Adding a constant to X-library for linear regresion
+8) model= sm.OLS(Y,Z).fit()  # OLS model fitting with statsmodel.api
+9) model.rsquared_adj        # Displays the adjusted r-sq
+
+
+
+====================================================================================================================================================
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+====================================================================================================================================================
+
+
+

@@ -1,0 +1,121 @@
+                                                           Part 4 : K-means Clustering
+                                                                   ====================
+
+
+import pandas as pd
+from pandas import DataFrame
+import matplotlib.pyplot as plt
+import numpy as np
+from sklearn.cluster import KMeans
+
+Data ={"x":[2,4,6,8,10,12,14,16,18,20],
+       "y":[45,23,78,29,38,56,76,75,36,65] }
+df=DataFrame(Data,columns=["x","y"])  ..............# Forming the table for Data
+df
+
+df.shape  ..........................................# Displays the shape of the dataset
+
+#Finding the values of wcss for different values of k, for finding the optimum value of K,with which clustering will be done:
+wcss=[]  ...........................................# Initializes an elbow list to store the wcss value
+for i in range(1:11):
+	km=KMeans(n_clusters=i)
+	km.fit_predict(df)
+	wcss.append(km.inertia_)
+wcss  ..............................................# Displays the value of wcss for each value of K (1,2,3,4,5,.......)
+
+
+#Finding the optimum value of k in k-means:
+plt.plot(range(1,11),wcss)
+plt.xlabel("No. of clusters")
+plt.ylabel("WCSS")
+plt.title("Elbow point graph for finding the optimal value of K")
+plt.show()...............................................................# For drawing the elbow point graph
+
+#From the graph we find that 2 clusters are needed
+
+
+
+#Finding the cluster centers/centroids:
+my_centroids=np.array([[2,45],[4,23]])  .................................# Taking any two(this is decided from the graph) data points 
+kmeans=KMeans(n_clusters=2, init=my_centroids)
+kmeans.fit(df)
+centroids=kmeans.cluster_centers_  ......................................# Displays the values of centroids/ cluster centers
+
+
+
+X=df.iloc[:,:].values
+y_kmeans=kmeans.fit_predict(X)  .........................................# Group the datasets into their respective clusters 
+y_kmeans 
+
+
+
+X[y_kmeans==0,0] ---> x-points of Cluster 1  ............................# 0,0 ==> cluster no.(0/1/2), column no.(x=0/y=1)
+X[y_kmeans==0,1] ---> y-points of Cluster 1  ............................# 0,1 ==> cluster 1, y-points
+
+X[y_kmeans==1,0] ---> x-points of Cluster 2
+X[y_kmeans==1,1] ---> y-points of Cluster 2
+
+X[y_kmeans==2,0] ---> x-points of Cluster 3
+X[y_kmeans==2,1] ---> y-points of Cluster 3
+
+centroids[:,0]   ---> x-points of Centroids  ............................# [:,0] ==> all rows, x-points
+centroids[:,1]   ---> y-points of Centroids  ............................# [:,0] ==> all rows, y-points
+
+
+
+#Plotting the clustered datapoints and their centroids:
+plt.scatter(x[y_kmeans==0,0], x[y_kmeans==0,1], c="violet", s=100, label=Cluster 1)  .........# Scatterplot for cluster 1 
+plt.scatter(x[y_kmeans==1,0], x[y_kmeans==1,1], c="blue", s=100, label=Cluster 1)  ...........# Scatterplot for cluster 2 
+plt.scatter(x[y_kmeans==2,0], x[y_kmeans==2,1], c="brown", s=100, label=Cluster 1)  ..........# Scatterplot for cluster 3 
+plt.scatter(centroids[:,0],centroids[:,1], c="lime", s=110, marker="*", label=Centroids)  ....# Scatterplot for the centroids of different clusters 
+plt.legend(loc="lower right")
+plt.show()
+
+
+
+====================================================================================================================================================
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+====================================================================================================================================================
+
+
+
+
+
+
+wcss=[]
+for i in range(1,11):
+	km=KMeans(n_cluters=i)
+	km.fit_predict(df)
+	wcss.append(km.inertia_)
+wcss                                       finding the wcss values list
+
+
+plt.plot((range(1,11),wcss))
+plt.show()                                plotting the elbow graph
+
+
+my_centroids=np.array([[,],[,]])
+kmeans=KMeans(n_clusters=2, init=my centroids).fit(df)
+centroids=kmeans.cluster_centers_                                 finding the centroids
+
+
+X= df.iloc[:,:].values
+ymeans= kmeans.fit_predict(X)
+ymeans
+
+
+plt.scatter(X[ymeans==0,0],X[ymeans==0,1],s=,c=, labels=)
+plt.scatter(X[ymeans==1,0],X[ymeans==1,1],s=,c=, labels=)
+plt.scatter(X[ymeans==2,0],X[ymeans==2,1],s=,c=, labels=)
+plt.scatter(centroids[:,0],centroids[:,1],s=,c=, labels=)
+plt.show()                                                           drawing the clusters
+
+
+
+
+
+
+
+
+
+

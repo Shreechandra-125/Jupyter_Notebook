@@ -1,0 +1,54 @@
+                                 Computational Statistics
+                               ===========================
+ Part 1 : Data Analytics
+         ================
+
+import pandas as pd
+pd.read_csv?
+name=pd.read_csv("Data_Set.csv")   .....................# Loading the dataset
+name	................................................# Reading the dataset
+
+pd.set_option('display.max_columns',5)	................# Setting the no. of columns to display
+name	................................................# Reading(displaying) the dataset
+
+name.shape   ...........................................# Display shape of the matrix
+
+name.head()   ..........................................# Display 1st 5 rows
+name.head(10) ..........................................# Display 1st 10 rows
+name.tail()   ..........................................# Display last 5 rows
+name[5:11]   ...........................................# Display specific group of rows (slicing)
+name.iloc[5:11, 1:5]   .................................# Display specific group of rows and columns (slicing)
+name[["PLAYER NAME","COUNTRY"]][0:5]  ..................# Slicing
+
+list(name.columns)  ....................................# Diplay the list of column names
+
+name.info()   ..........................................# Display information about the matrix
+
+name.transpose()  ......................................# Display the transposed matrix
+name.transpose().head()   ..............................# Display 1st 5 rows of the transposed matrix
+name.head().transpose()   ..............................# At first extracts the 1st 5 rows and then display the transpose of that matrix
+
+name.COUNTRY.value_counts()  ...........................# Displays the frequency of unique values for a specific column
+name.COUNTRY.value_counts(normalize=True)*100  .........# Displays the percentage of unique values for a specific column
+round(name.COUNTRY.value_counts(normalize=True)*100,3)  # Displays the percentage of unique values for a specific column upto 3 decimal places
+
+pd.crosstab(name["AGE"],name["PLAYING_ROLE"])  .........# Display combination of two columns
+pd.crosstab(name.AGE,name.PLAYING_ROLE)   ..............# Same
+
+name[["PLAYER NAME","SOLD PRICE"]].sort_values("SOLD PRICE")  ...............................#Sort values wrt some particular column
+name[["PLAYER NAME","SOLD PRICE"]].sort_values("SOLD PRICE", ascending=False)[0:10]  ........# Sort values in descending order
+
+name["PROFIT"]=name["SOLD PRICE"] - name["BASE PRICE"]   ....................................# Creating new feature/column
+name[["PLAYER NAME","PROFIT"]]  .............................................................# Displaying the new feature
+
+name.groupby("AGE")["SOLD PRICE"].mean()   ..................................................# Applying statistical methods on grouped data
+name.groupby("AGE")["SOLD PRICE"].min()    ..................................................# Same
+name.groupby("AGE")["SOLD PRICE"].max()    ..................................................# Same
+name.groupby("AGE")["SOLD PRICE"].max().reset_index()   .....................................# Reseting index
+name.groupby(["AGE","PLAYING_ROLE"])["SOLD PRICE"].max().reset_index() ......................# Grouping with multiple columns
+
+name[name["WKTS"]>70][['PLAYER NAME','COUNTRY','WKTS']]  ....................................# Filtering records based on certain condition
+
+
+=======================================================================XXXXXXXX=====================================================================
+

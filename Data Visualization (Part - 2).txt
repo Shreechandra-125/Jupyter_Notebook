@@ -1,0 +1,364 @@
+                        Part 2 : Data Visualization
+                                ====================
+
+
+
+######### 1.Drawing Plots in a graph #########
+        ==============================
+
+import matplotlib.pyplot as plt  ...........# 2D plotting library of python
+import numpy as np
+%matplotlib inline
+
+x=np.array([2,4,6,8])  .....................# x points
+y=np.array([12,23,6,45])  ..................# y points
+plt.plot(x,y)  ..............................................................................................................# plt.plot(x,y)
+plt.show()
+
+y=np.array([12,23,6,45])
+plt.plot(y)  ...............................# If x points are not given, then default values{0,1,2,3,4,...} are taken
+plt.show()
+
+x=np.array([2,4,6,8])
+y=np.array([12,23,6,45])
+plt.plot(x,y,marker="p",linestyle='dotted',color="brown")  ......# Format string: Marker/Linestyle/Color
+plt.show()
+
+x=np.array([2,4,6,8])
+y=np.array([12,23,6,45])
+plt.plot(x,y,"v:r")  .......................# Format string: Marker/Linestyle/Color
+plt.show()
+
+x=np.array([2,4,6,8])
+y=np.array([12,23,6,45])
+plt.plot(x,y,"*--m",ms=15)  ................# markersize=15 / ms=15
+plt.show()
+
+x=np.array([2,4,6,8])
+y=np.array([12,23,6,45])
+plt.plot(x,y,color="olive",linewidth=10) ...# linewidth=10 / lw=10
+plt.show()
+
+[ Markers=> o / . / d / D / * / s / p / v / ^ / < / > / P 
+  Linestyles=> - / -- / -. / : 
+  Colors=> olive / pink / deeppink / hotpink / blue / cyan / red / yellow / magenta / brown / green / purple / violet / black ..... ]
+
+x=np.array([2,4,6,8])
+y=np.array([12,23,6,45])
+plt.plot(x,y,"o:r")
+plt.xlabel("x-axis")  .......................# Displays label for x-axis
+plt.ylabel("y-axis")  .......................# Displays label for x-axis
+plt.title("Plotting a line in a graph")  ....# Displays a title for the graph
+plt.show()
+
+x=np.array([2,4,6,8])
+y=np.array([12,23,6,45])
+plt.plot(x,y,"p:m",ms=10)  ..................# Plot 1
+x=np.array([1,3,2,4])
+y=np.array([12,2,32,-4])
+plt.plot(x,y,"v--y",ms=10)  .................# Plot 2
+plt.show()
+
+x=np.array([2,4,6,8])
+y=np.array([12,23,6,45])
+plt.plot(x,y,"p:m",ms=10)  ..................# Plot 1
+x=np.array([1,3,2,4])
+y=np.array([12,2,32,-4])
+plt.plot(x,y,"v--y",ms=10)  .................# Plot 2
+plt.xlabel("x-axis")
+plt.ylabel("y-axis")
+plt.title("Plotting a line in a graph")
+plt.show()
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+######### 2.Drawing barchart in a graph #########
+        =================================
+
+
+x=np.array(["A","B","C","D"])
+y=np.array([3,8,1,10])
+plt.bar(x,y,color="purple")  .................................................................................................# plt.bar(x,y)
+plt.show()
+
+x=np.array(["A","B","C","D"])
+y=np.array([3,8,1,10])
+plt.bar(x,y,color="olive", width=0.5)  ...........................................................# Sets the width of the bar
+plt.show()
+
+x=np.array(["A","B","C","D"])
+y=np.array([3,8,1,10])
+plt.barh(x,y,color="teal", height=0.4)  ..........................................................# Horizontal Bars
+plt.show()
+
+
+import pandas as pd
+df=pd.read_csv("ipl_auction_df.csv")
+df.groupby(['AGE','PLAYING_ROLE'])["SOLD PRICE"].mean().reset_index()
+import seaborn as sn
+sn.barplot(x='AGE',y='SOLD PRICE',data=df)  ......................................................# sn.barplot()
+plt.title("Bar plot for average sold price versus age")
+plt.xlabel('AGE')
+plt.ylabel('mean(SOLD PRICE)')
+plt.show()
+
+
+# Histogram : Frequency distribution of a set of continuous variables
+
+plt.hist(df['SOLD PRICE'],bins=15)  ..............................................................# plt.hist()
+plt.title("Histogram for SOLD PRICE")
+plt.xlabel('SOLD PRICE')
+plt.ylabel('Frequency')
+plt.show()
+
+# Displot : Density plot : Smooth histogram : Shows the density/distribution of data over a continuous interval
+
+sn.distplot(df['SOLD PRICE'])  ...................................................................# sn.displot()
+plt.title("Distribution plot for SOLD PRICE")
+plt.show()
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+######### 3.Scatter plots in a graph #########
+        ==============================
+
+
+x=np.array([4,8,2,5,6,7,9,4,7,5,10,11,45])
+y=np.array([7,40,55,85,96,74,85,10,2,74,11,45,85])
+plt.scatter(x,y)  .......................................................................................................# plt.scatter(x,y)
+plt.show()
+
+x=np.array([4,8,2,5,6,7,9,4,7,5,10,11,45])
+y=np.array([7,40,55,85,96,74,85,10,2,74,11,45,85])
+plt.scatter(x,y,color='magenta')
+x=np.array([4,8,6,10,12,45,74,85,96,30,10,12,45])
+y=np.array([7,40,55,85,96,74,85,78,45,10,13,45,78])
+plt.scatter(x,y,color='green')
+plt.title("Scatter plot")
+plt.xlabel('x-axis')
+plt.ylabel('y-axis')
+plt.show()  ...................................# Two scatter plots in the same graph
+
+x=np.array([4,8,2,5,6,7,9,4,7,5,10,11,45])
+y=np.array([7,40,55,85,96,74,85,10,2,74,11,45,85])
+plt.scatter(x,y,color='magenta')
+x=np.array([4,8,6,10,12,45,74,85,96,30,10,12,45])
+y=np.array([7,40,55,85,96,74,85,78,45,10,13,45,78])
+plt.scatter(x,y,color='green')
+plt.title("Scatter plot")
+plt.xlabel('x-axis')
+plt.ylabel('y-axis')
+plt.grid()  ....................................# Drawing grid lines
+plt.show()
+
+x=np.array([4,8,2,5,6,7,9,4,7,5,10,11,45])
+y=np.array([7,40,55,85,96,74,85,10,2,74,11,45,85])
+plt.scatter(x,y,color='magenta')
+x=np.array([4,8,6,10,12,45,74,85,96,30,10,12,45])
+y=np.array([7,40,55,85,96,74,85,78,45,10,13,45,78])
+plt.scatter(x,y,color='green')
+plt.title("Scatter plot")
+plt.xlabel('x-axis')
+plt.ylabel('y-axis')
+plt.grid(axis="x")  ............................# Drawing grid lines only above x-axis points(i.e vertical lines in the graph)
+plt.show()
+
+x=np.array([4,8,2,5,6,7,9,4,7,5,10,11,45])
+y=np.array([7,40,55,85,96,74,85,10,2,74,11,45,85])
+plt.scatter(x,y,color='magenta')
+x=np.array([4,8,6,10,12,45,74,85,96,30,10,12,45])
+y=np.array([7,40,55,85,96,74,85,78,45,10,13,45,78])
+plt.scatter(x,y,color='green')
+plt.title("Scatter plot")
+plt.xlabel('x-axis')
+plt.ylabel('y-axis')
+plt.grid(axis="y")  ............................# Drawing grid lines only above y-axis points(i.e horizontal lines in the graph)
+plt.show()
+
+x=np.array([4,8,2,5,6,7,9,4,7,5,10,11,45])
+y=np.array([7,40,55,85,96,74,85,10,2,74,11,45,85])
+plt.scatter(x,y,color='magenta')
+x=np.array([4,8,6,10,12,45,74,85,96,30,10,12,45])
+y=np.array([7,40,55,85,96,74,85,78,45,10,13,45,78])
+plt.scatter(x,y,color='green')
+plt.title("Scatter plot")
+plt.xlabel('x-axis')
+plt.ylabel('y-axis')
+plt.grid(color="brown",ls=":",lw=1.5)  ..........# Adding properties to grid lines
+plt.show()
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+######### 4.Pairplot, Correlation, Heatmap #########
+        ====================================
+
+import seaborn as sn
+influential_features=['SR_B','AVE','SIXERS','SOLD PRICE']
+sn.pairplot(df[influential_features])  ......................................................................................# sn.pairplot(df[...])
+plt.show()
+
+# Pairplot shows the histogram on the diagonal and the scatterplots on the upper and lower triangles and shows the correlation among the variables.
+
+
+df[influential_features].corr()  ........................................# More the correlation value, more is the correlation between them
+
+
+import seaborn as sn
+features=['SR_B','AVE','SIXERS','SOLD PRICE']
+sn.heatmap(df[features].corr())  ................................................................................# sn.heatmap(df[...].corr())
+plt.title("Heatmap of the correlation values")
+plt.show()
+
+
+sn.heatmap(df[features].corr(),annot=True)  ............................# Annot=True => shows the correlation values in the heatmap
+plt.show()
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+######### 5.Piechart #########
+        ==============
+
+x=np.array([29,31,16,47,35])
+plt.pie(x)    ..................................................................................................................# plt.pie(x)
+plt.show()  ............................................................# Draws a piechart
+
+
+x=np.array([29,31,16,47,35])
+labelss=["A","B","C","D","E"]  .........................................# Adding labels to different slices 
+colours=["orange","teal","yellow","purple","olive"]  ...................# Adding different colours to different slices
+plt.pie(x,labels=labelss,colors=colours,autopct="%.2f%%")  .............# Displays the percentage values of each slice
+plt.title("Pie plot")
+plt.axis("equal")  .....................................................# Makes the aspect ratio equal
+plt.legend(loc="lower center")  ........................................# Position of the legend
+plt.show()
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+######### 6.Displaying Multiple Plots #########
+        ===============================
+
+
+import matplotlib.pyplot as plt
+import numpy as np
+x=np.array([0,1,2,3])
+y=np.array([3,8,1,10])
+plt.subplot(1,2,1)  ..........................# rows=1, columns=2, plot_no./index=1  ...........................................# plt.subplot(r,c,i)
+plt.plot(x,y)
+plt.title("Plot 1")
+x=np.array([0,1,2,3])
+y=np.array([10,20,30,40])
+plt.subplot(1,2,2)  ..........................# rows=1, columns=2, plot_no./index=2
+plt.plot(x,y)
+plt.title("Plot 2")
+plt.show()
+
+
+x=np.array([0,1,2,3])
+y=np.array([3,8,1,10])
+plt.subplot(2,1,1)  ..........................# rows=2, columns=1, plot_no./index=1
+plt.plot(x,y)
+plt.title("Plot 1")
+plt.subplots_adjust(hspace=0.5)  .............# Adjusting the space between the plots, so that they do not overlap
+x=np.array([0,1,2,3])
+y=np.array([10,20,30,40])
+plt.subplot(2,1,2)  ..........................# rows=2, columns=1, plot_no./index=2
+plt.plot(x,y)
+plt.title("Plot 2")
+plt.show()
+
+
+#Plot 1:
+x=np.array([0,1,2,3])
+y=np.array([10,20,30,45])
+plt.subplot(2,3,1)
+plt.plot(x,y)
+plt.title("Fig 1")
+plt.subplots_adjust(hspace=0.5)
+#Plot 2:
+x=np.array([0,1,2,3])
+y=np.array([10,24,35,40])
+plt.subplot(2,3,2)
+plt.plot(x,y)
+plt.title("Fig 2")
+plt.subplots_adjust(hspace=0.5)
+#Plot 3:
+x=np.array([0,1,2,3])
+y=np.array([11,70,30,40])
+plt.subplot(2,3,3)
+plt.plot(x,y)
+plt.title("Fig 3")
+plt.subplots_adjust(hspace=0.5)
+#Plot 4:
+x=np.array([0,1,2,3])
+y=np.array([10,20,30,78])
+plt.subplot(2,3,4)
+plt.plot(x,y)
+plt.title("Fig 4")
+#Plot 5:
+x=np.array([0,1,2,3])
+y=np.array([3,8,1,10])
+plt.subplot(2,3,5)
+plt.plot(x,y)
+plt.title("Fig 5")
+#Plot 6:
+x=np.array([0,1,2,3])
+y=np.array([3,8,1,77])
+plt.subplot(2,3,6)
+plt.plot(x,y)
+plt.title("Fig 6")
+plt.suptitle("Multiple Plots")  ....................# Adding supertitle to the whole fig.(Main heading)
+plt.show()
+
+=====================================================================XXXXXXX========================================================================
+
+
+
+***** Notes:
+
+#### plt : plot(), subplot(), bar(), barh(), scatter(), grid(), pie(), hist(),etc....
+1) plt.plot(x,y)                 # For drawing plots(lines)
+2) plt.bar(x,y)                  # For drawing bar graphs
+3) plt.barh(x,y)                 # For drawing horizontal bar graphs
+4) plt.hist(df["..."])           # For drawing histogram/ frequency distribution of a particular variable
+5) plt.scatter(x,y)              # For drawing scatter plots
+6) plt.grid()                    # For drawing grid lines
+7) plt.pie(x)                    # For drawing pie-chart
+8) plt.subplot(r,c,i)            # For creating space for sub-plots(where, r=no. of rows, c=no. of columns, i=index no./plot no.)
+9) plt.subplots_adjust(hspace=)  # For adjusting the space between two plots
+10)plt.suptitle("...")           # For adding super-title to the whole fig.
+11)plt.title("...")              # For adding title to a single plot/subplot/bargraph/histogram/displot/scatterplot/piechart
+12)plt.xlabel("...")             # For adding a label along the x-axis
+13)plt.ylabel("...")             # For adding a label along the y-axis
+14)plt.legend(loc="...")         # For setting the position of the legend in a pie-chart
+15)plt.show()                    # For printing/showing the plot/graph
+
+
+
+#### sn : barplot(), displot(), pairplot(), heatmap()
+1) sn.barplot(x,y,data=df)       # For drawing bar graphs
+2) sn.displot(df["..."])         # For drawing smooth histogram/ density plot over a continuous interval
+3) sn.pairplot(df[...])          # For drawing histograms and scatterplots in a single graph
+4) sn.heatmap(df[...].corr())    # For drawing heatmap of correlated variables
+
+
+====================================================================================================================================================
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+====================================================================================================================================================
+
+
+
